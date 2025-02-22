@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+textarea {
+    width: 100%;
+    font-size: 1rem;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.entity {
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px 4px;
+}
+
+.entity.B-PERSON { background-color: #ffcccc; }
+.entity.B-ORG { background-color: #ccffcc; }
+.entity.B-LOC { background-color: #ccccff; }
+/* Add styles for other entity labels as needed */
+

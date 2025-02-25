@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# unsloth stuff
+*temp*
+*cache*
+
+# venvs
+*venv*
+
 # C extensions
 *.so
 

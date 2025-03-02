@@ -1,11 +1,11 @@
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-MODEL_DIR = "../../artifacts/models/meta_unllama_ner/final"
-MODEL_REPO_NAME = "turkishnlp/UNllama3.2-1b-instruct-ner" 
+MODEL_DIR = "../../artifacts/models/llama3.2-1b-instruct_cpt-FULL/final"
+MODEL_REPO_NAME = "turkishnlp/Llama-3.2-1B-Instruct-CPT-oscar-Unsloth-FULL" 
 
 def push_to_hub(model_dir, repo_name):
     print("Loading model and tokenizer...")
-    model = AutoModelForSequenceClassification.from_pretrained(model_dir)
+    model = AutoModelForCausalLM.from_pretrained(model_dir)
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
 
     print(f"Pushing model to Hugging Face Hub at {repo_name}...")

@@ -4,7 +4,7 @@ from peft import get_peft_model, LoraConfig, TaskType
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 MODEL_ID="meta-llama/Llama-3.2-1b-Instruct"
-DATASET_NAME="huggingface_dataset_path"
+DATASET_NAME="turkishnlp/MilliyetNER-JSON-Format"
 SAVE_DIR = "./models/meta_llama_ner"
 
 LR=1e-4

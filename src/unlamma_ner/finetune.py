@@ -4,11 +4,12 @@ from peft import get_peft_model, LoraConfig, TaskType
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 from modeling_llama import UnmaskingLlamaForTokenClassification
 
-MODEL_ID="meta-llama/Llama-3.2-1b-Instruct"
-DATASET_NAME="huggingface_dataset_path"
-SAVE_DIR = "./models/meta_unllama_ner"
+# MODEL_ID="meta-llama/Llama-3.2-1b-Instruct"
+MODEL_ID = 'turkishnlp/Llama-3.2-1B-Instruct-CPT-oscar-Unsloth'
+DATASET_NAME="turkishnlp/WikiANN-Turkish-JSON-Format"
+SAVE_DIR = "../../artifacts/models/unsloth/cpt-meta_unllama_ner_wikiann"
 
-id2label = { 0: "B-LOCATION", 1: "B-ORGANIZATION", 2: "B-PERSON", 3: "I-LOCATION", 4: "I-ORGANIZATION", 5: "I-PERSON", 6: "O" }
+id2label = { 0: "B-LOC", 1: "B-ORG", 2: "B-PER", 3: "I-LOC", 4: "I-ORG", 5: "I-PER", 6: "O" }
 
 label2id = {v: k for k, v in id2label.items()}
 
@@ -18,7 +19,7 @@ dataset = load_dataset(DATASET_NAME)
 model = UnmaskingLlamaForTokenClassification.from_pretrained(MODEL_ID, num_labels=len(label2id), id2label=id2label, label2id=label2id)
 model.to("cuda")
 
-peft_config = LoraConfig(task_type=TaskType.TOKEN_CLS, inference_mode=False, r=12, lora_alpha=32, lora_dropout=0.1)
+peft_config = LoraConfig(task_type=TaskType.TOKEN_CLS, inference_mode=False, r=12, lora_alpha=32, lora_dropout=0.1, )
 model = get_peft_model(model, peft_config)
 model.to("cuda")
 
@@ -83,7 +84,7 @@ training_args = TrainingArguments(
     learning_rate=1e-4,
     per_device_train_batch_size=32,  
     per_device_eval_batch_size=32,  
-    num_train_epochs=3,  
+    num_train_epochs=1,  
     weight_decay=0.01, 
     save_strategy="epoch", 
     logging_steps=1, 
@@ -101,5 +102,3 @@ trainer = Trainer(
 )
 
 trainer.train()
-
-trainer.save_model(f"{SAVE_DIR}/final")

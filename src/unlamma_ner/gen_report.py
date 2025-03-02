@@ -6,13 +6,15 @@ from sklearn.metrics import precision_recall_fscore_support, accuracy_score, con
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-MODEL_PATH = "turkishnlp/UNllama3.2-1b-instruct-ner"
-DATASET_NAME="huggingface_dataset_path"
-MD_REPORT_PATH = f"./eval_results/{MODEL_PATH.split('/')[-1]}_report.md"
+MODEL_PATH = "/home/yigittuncer/nlp/artifacts/models/unsloth/cpt-meta_unllama_ner_wikiann/final"
+
+DATASET_NAME="turkishnlp/WikiANN-Turkish-JSON-Format"
+# MD_REPORT_PATH = f"./eval_results/{MODEL_PATH.split('/')[-1]}_report.md"
+MD_REPORT_PATH = f"./eval_results/finetune_report.md"
 
 print("Loading dataset...")
 dataset = load_dataset(DATASET_NAME)
-id2label = { 0: "B-LOCATION", 1: "B-ORGANIZATION", 2: "B-PERSON", 3: "I-LOCATION", 4: "I-ORGANIZATION", 5: "I-PERSON", 6: "O" }
+id2label = { 0: "B-LOC", 1: "B-ORG", 2: "B-PER", 3: "I-LOC", 4: "I-ORG", 5: "I-PER", 6: "O" }
 label2id = {v: k for k, v in id2label.items()}
 
 print("Loading tokenizer and model...")
@@ -122,7 +124,7 @@ def format_confusion_matrix(cm, labels):
 
 training_args = TrainingArguments(
     output_dir="./eval_results",
-    per_device_eval_batch_size=64,
+    per_device_eval_batch_size=128,
     logging_dir="./logs",
     report_to="none",
 )

@@ -5,11 +5,11 @@ from modeling_llama import UnmaskingLlamaForTokenClassification
 import torch
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix
 
-# MODEL_ID = 'turkishnlp/Llama-3.2-1B-Instruct-CPT-oscar-Unsloth'
-MODEL_ID = 'unsloth/Llama-3.2-1B-Instruct'
-DATASET_NAME="turkishnlp/WikiANN-Turkish-JSON-Format"
-SAVE_DIR = "../../artifacts/models/unsloth/cpt-meta_unllama_ner_wikiann"
-MD_REPORT_PATH = f"./eval_results/{MODEL_ID.split('/')[-1]}_report.md"
+MODEL_ID = 'turkishnlp/Llama-3.2-1B-Instruct-CPT-oscar-Unsloth-FULL'
+#MODEL_ID = 'unsloth/Llama-3.2-1B-Instruct'
+DATASET_NAME="data"
+SAVE_DIR = "../../artifacts/models/unsloth/cpt-meta_unllama_WikiNER-EN"
+MD_REPORT_PATH = f"./eval_results/{MODEL_ID.split('/')[-1]}_WikiNER_EN_report.md"
 
 id2label = { 0: "B-LOC", 1: "B-ORG", 2: "B-PER", 3: "I-LOC", 4: "I-ORG", 5: "I-PER", 6: "O" }
 
@@ -24,6 +24,8 @@ model.to("cuda")
 peft_config = LoraConfig(task_type=TaskType.TOKEN_CLS, inference_mode=False, r=12, lora_alpha=32, lora_dropout=0.1, )
 model = get_peft_model(model, peft_config)
 model.to("cuda")
+
+model.print_trainable_parameters()
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
 tokenizer.pad_token = tokenizer.eos_token
@@ -86,7 +88,7 @@ training_args = TrainingArguments(
     learning_rate=1e-4,
     per_device_train_batch_size=32,  
     per_device_eval_batch_size=32,  
-    num_train_epochs=5,  
+    num_train_epochs=3,  
     weight_decay=0.01, 
     save_strategy="epoch", 
     logging_steps=1, 

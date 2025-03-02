@@ -6,10 +6,11 @@ import torch
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix
 
 MODEL_ID = 'turkishnlp/Llama-3.2-1B-Instruct-CPT-oscar-Unsloth-FULL'
-#MODEL_ID = 'unsloth/Llama-3.2-1B-Instruct'
-DATASET_NAME="data"
-SAVE_DIR = "../../artifacts/models/unsloth/cpt-meta_unllama_WikiNER-EN"
-MD_REPORT_PATH = f"./eval_results/{MODEL_ID.split('/')[-1]}_WikiNER_EN_report.md"
+# MODEL_ID = 'unsloth/Llama-3.2-1B-Instruct'
+# MODEL_ID = 'turkishnlp/UNllama3.2-1b-instruct-ner-wikiann'
+DATASET_NAME="turkishnlp/WikiANN-Turkish-JSON-Format"
+SAVE_DIR = "../../artifacts/models/unsloth/cpt-meta_unllama_ner_wikiann-FULL"
+MD_REPORT_PATH = f"./eval_results/{MODEL_ID.split('/')[-1]}_report.md"
 
 id2label = { 0: "B-LOC", 1: "B-ORG", 2: "B-PER", 3: "I-LOC", 4: "I-ORG", 5: "I-PER", 6: "O" }
 
@@ -21,9 +22,15 @@ dataset = load_dataset(DATASET_NAME)
 model = UnmaskingLlamaForTokenClassification.from_pretrained(MODEL_ID, num_labels=len(label2id), id2label=id2label, label2id=label2id)
 model.to("cuda")
 
-peft_config = LoraConfig(task_type=TaskType.TOKEN_CLS, inference_mode=False, r=12, lora_alpha=32, lora_dropout=0.1, )
+peft_config = LoraConfig(task_type=TaskType.TOKEN_CLS, inference_mode=False, r=12, lora_alpha=32, lora_dropout=0.1, target_modules=["q_proj", "v_proj"])
 model = get_peft_model(model, peft_config)
 model.to("cuda")
+
+# Freeze all model parameters except "q_proj", "v_proj"
+for name, param in model.named_parameters():
+    if not any(proj in name for proj in ["q_proj", "v_proj"]): 
+        param.requires_grad = False
+
 
 model.print_trainable_parameters()
 

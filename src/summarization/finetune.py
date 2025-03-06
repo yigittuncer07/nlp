@@ -13,6 +13,7 @@ OUTPUT_DIR="../../artifacts/models/llama3.2-1b_summarization"
 ### PULL MODEL AND TOKENIZER ###
 tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
 tokenizer.pad_token = tokenizer.eos_token
+EOS_TOKEN = tokenizer.eos_token
 model = AutoModelForCausalLM.from_pretrained(MODEL_ID)
 peft_config = LoraConfig(r=12, lora_alpha=32, lora_dropout=0.1)
 model = get_peft_model(model, peft_config)
@@ -20,7 +21,31 @@ model.cuda()
 
 ### LOAD AND PRE-PROCESS DATASET ###
 dataset = load_from_disk(DATASET)
-breakpoint()
+
+#Formats the dataset into a structured chat template and tokenizes it
+def formatting_prompts_func(examples):
+    inputs = examples["input"]
+    instructions = examples["instruction"]
+    outputs = examples["output"]
+    formatted_texts = []
+
+    for instruction, input_text, output_text in zip(instructions, inputs, outputs):
+        formatted_text = tokenizer.apply_chat_template(
+            {
+                "instruction": instruction,
+                "input": input_text,
+                "output": output_text
+            },
+            tokenize=False 
+        )
+        tokenized = tokenizer(formatted_text, truncation=False, return_length=True)
+        if tokenized["length"][0] < MAX_SEQ_LENGTH - 3:
+            formatted_texts.append(formatted_text + EOS_TOKEN)
+
+    return {"text": formatted_texts}
+
+dataset =dataset.map(formatting_prompts_func,batched=True)
+
 # Shorten for demo
 dataset['train'] = dataset['train'].select(range(100000))
 dataset['test'] = dataset['test'].select(range(10000))
@@ -47,6 +72,7 @@ trainer = SFTTrainer(
     eval_dataset=dataset['test'],
     args=training_args,
     max_seq_length=MAX_SEQ_LENGTH,
+    dataset_text_field="text"
 )
 
 trainer.train()

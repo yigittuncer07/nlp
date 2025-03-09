@@ -21,33 +21,36 @@ model.cuda()
 
 ### LOAD AND PRE-PROCESS DATASET ###
 dataset = load_from_disk(DATASET)
-
-#Formats the dataset into a structured chat template and tokenizes it
 def formatting_prompts_func(examples):
-    inputs = examples["input"]
-    instructions = examples["instruction"]
-    outputs = examples["output"]
     formatted_texts = []
 
-    for instruction, input_text, output_text in zip(instructions, inputs, outputs):
+    for instruction, input_text, output_text in zip(examples["instruction"], examples["input"], examples["output"]):
+        # Format the text properly
         formatted_text = tokenizer.apply_chat_template(
-            {
-                "instruction": instruction,
-                "input": input_text,
-                "output": output_text
-            },
-            tokenize=False 
+            [
+                {"role": "instruction", "content": instruction},
+                {"role": "input", "content": input_text},
+                {"role": "output", "content": output_text}
+            ],
+            tokenize=False  # Ensures output is a string, not tokenized IDs
         )
+
+        # Ensure it's within the token limit
         tokenized = tokenizer(formatted_text, truncation=False, return_length=True)
         if tokenized["length"][0] < MAX_SEQ_LENGTH - 3:
             formatted_texts.append(formatted_text + EOS_TOKEN)
+        else:
+            formatted_texts.append("")  # **Keep batch size consistent**
 
-    return {"text": formatted_texts}
+    return {"text": formatted_texts}  # **Ensure output length matches input length**
 
-dataset =dataset.map(formatting_prompts_func,batched=True)
+# Apply function to dataset
+dataset = dataset.map(formatting_prompts_func, batched=True)
+
+breakpoint()
 
 # Shorten for demo
-dataset['train'] = dataset['train'].select(range(100000))
+dataset['train'] = dataset['train'].select(range(10000))
 dataset['test'] = dataset['test'].select(range(10000))
 dataset['eval'] = dataset['eval'].select(range(10000))
 print(f"Example from train set: {dataset['train'][0]}")

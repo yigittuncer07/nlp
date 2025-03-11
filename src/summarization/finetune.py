@@ -1,12 +1,12 @@
 ### HANDLE IMPORTS ###
 from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
-from datasets import load_from_disk
+from datasets import load_dataset
 from trl import SFTTrainer
 from peft import get_peft_model, LoraConfig
 
 ### SET VARIABLES ###
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-DATASET = "../../artifacts/datasets/turkish_summarization"
+DATASET = "turkishnlp/conversation_summarization"
 MAX_SEQ_LENGTH= 1024
 OUTPUT_DIR="../../artifacts/models/llama3.2-1b_summarization"
 
@@ -19,38 +19,41 @@ peft_config = LoraConfig(r=12, lora_alpha=32, lora_dropout=0.1)
 model = get_peft_model(model, peft_config)
 model.cuda()
 
+
 ### LOAD AND PRE-PROCESS DATASET ###
-dataset = load_from_disk(DATASET)
+dataset = load_dataset(DATASET)
+len_prio=len(dataset['train'])
+
 def formatting_prompts_func(examples):
     formatted_texts = []
 
-    for instruction, input_text, output_text in zip(examples["instruction"], examples["input"], examples["output"]):
-        # Format the text properly
+    for messages in examples["messages"]:  
+        if not isinstance(messages, list): 
+            formatted_texts.append("")
+            continue
+
         formatted_text = tokenizer.apply_chat_template(
-            [
-                {"role": "instruction", "content": instruction},
-                {"role": "input", "content": input_text},
-                {"role": "output", "content": output_text}
-            ],
-            tokenize=False  # Ensures output is a string, not tokenized IDs
+            messages,
+            tokenize=False  
         )
 
-        # Ensure it's within the token limit
         tokenized = tokenizer(formatted_text, truncation=False, return_length=True)
         if tokenized["length"][0] < MAX_SEQ_LENGTH - 3:
             formatted_texts.append(formatted_text + EOS_TOKEN)
         else:
-            formatted_texts.append("")  # **Keep batch size consistent**
+            formatted_texts.append(None)  # Mark for removal
 
-    return {"text": formatted_texts}  # **Ensure output length matches input length**
+    return {"text": formatted_texts}  
 
 # Apply function to dataset
 dataset = dataset.map(formatting_prompts_func, batched=True)
+dataset = dataset.filter(lambda x: x["text"] is not None)  # Remove None values
+len_after=len(dataset['train'])
+print(f"No of instances removed: {len_prio-len_after}")
 
-breakpoint()
-
+print(dataset["train"][:20])
 # Shorten for demo
-dataset['train'] = dataset['train'].select(range(10000))
+dataset['train'] = dataset['train'].select(range(200000))
 dataset['test'] = dataset['test'].select(range(10000))
 dataset['eval'] = dataset['eval'].select(range(10000))
 print(f"Example from train set: {dataset['train'][0]}")

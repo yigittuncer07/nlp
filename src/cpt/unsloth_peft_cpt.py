@@ -18,7 +18,7 @@ max_seq_length=1024 # Choose any! We auto support RoPE Scaling internally!
 dtype=None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
 load_in_4bit=True # Use 4bit quantization to reduce memory usage. Can be False.
 
-MODEL_NAME='unsloth/Llama-3.2-3B-Instruct'
+MODEL_NAME='unsloth/Llama-3.2-1B-Instruct'
 OUTPUT_DIR = f"/media/drive1/{MODEL_NAME.split('/')[1]}-cpt"
 DATA_PATH='/home/yigittuncer/llm-training/artifacts/datasets/oscar-tr'
 
@@ -70,7 +70,7 @@ dataset = load_from_disk(DATA_PATH)
 dataset = dataset["train"]
 
 # load only some of the data
-dataset = dataset.train_test_split(train_size = 0.001)["train"]
+dataset = dataset.train_test_split(train_size = 0.2)["train"]
 
 dataset.shuffle(seed = 2523)
 
@@ -116,6 +116,4 @@ except Exception as e:
     breakpoint()
 finally:    
     model.save_pretrained(f"{OUTPUT_DIR}/final") 
-    run.finish()
-
 

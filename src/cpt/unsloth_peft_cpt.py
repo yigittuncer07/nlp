@@ -3,6 +3,7 @@ import torch
 from datasets import load_from_disk
 from unsloth import is_bfloat16_supported
 from unsloth import UnslothTrainer, UnslothTrainingArguments
+import wandb
 import warnings
 warnings.filterwarnings("ignore", message=".*average_tokens_across_devices.*")
 
@@ -17,9 +18,15 @@ max_seq_length=1024 # Choose any! We auto support RoPE Scaling internally!
 dtype=None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
 load_in_4bit=True # Use 4bit quantization to reduce memory usage. Can be False.
 
-MODEL_NAME='unsloth/Llama-3.2-1B-Instruct'
+MODEL_NAME='unsloth/Llama-3.2-3B-Instruct'
 OUTPUT_DIR = f"/media/drive1/{MODEL_NAME.split('/')[1]}-cpt"
-DATA_PATH='/home/yigittuncer/llm-training/artifacts/datasets/oscar-tr-dummy'
+DATA_PATH='/home/yigittuncer/llm-training/artifacts/datasets/oscar-tr'
+
+wandb.login()
+config = {
+    "model_name": MODEL_NAME,
+}
+wandb.init(project="CPT", name=MODEL_NAME, config=config)
 
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name = MODEL_NAME,
@@ -59,11 +66,11 @@ def formatting_prompts_func(examples):
 
 
 # dataset = load_dataset("musabg/wikipedia-oscar-tr", split = "train",)
-dataset = load_from_disk("/home/yigittuncer/llm-training/artifacts/datasets/oscar-tr-dummy", keep_in_memory=True)
+dataset = load_from_disk(DATA_PATH)
 dataset = dataset["train"]
 
 # load only some of the data
-dataset = dataset.train_test_split(train_size = 0.5)["train"]
+dataset = dataset.train_test_split(train_size = 0.001)["train"]
 
 dataset.shuffle(seed = 2523)
 
@@ -97,7 +104,7 @@ trainer = UnslothTrainer(
         lr_scheduler_type = "linear",
         seed = 42,
         output_dir = OUTPUT_DIR,
-        report_to = "none", # Use this for WandB etc
+        report_to = "wandb", # Use this for WandB etc
     ),
 )
 
@@ -109,3 +116,6 @@ except Exception as e:
     breakpoint()
 finally:    
     model.save_pretrained(f"{OUTPUT_DIR}/final") 
+    run.finish()
+
+

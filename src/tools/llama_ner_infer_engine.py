@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 import torch
-from tools.modeling_llama import UnmaskingLlamaForTokenClassification
+from modeling_llama import UnmaskingLlamaForTokenClassification
 
 class BaseNERInferenceEngine():
     def __init__(self, MODEL_PATH, id2label, model_class=AutoModelForTokenClassification):
@@ -13,7 +13,8 @@ class BaseNERInferenceEngine():
             num_labels=len(self.label2id), 
             id2label=self.id2label, 
             label2id=self.label2id
-        ) 
+        )
+        self.model.to('cuda')
 
     # There probably are more elegant ways to implement this, without using the tokenizers start words like I did, but this also works
     def infer_labels(self, tokens, max_length=256):

@@ -18,15 +18,16 @@ max_seq_length=1024 # Choose any! We auto support RoPE Scaling internally!
 dtype=None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
 load_in_4bit=True # Use 4bit quantization to reduce memory usage. Can be False.
 
-MODEL_NAME='unsloth/Llama-3.2-1B-Instruct'
+MODEL_NAME='unsloth/Llama-3.2-3B-Instruct'
 OUTPUT_DIR = f"/media/drive1/{MODEL_NAME.split('/')[1]}-cpt"
-DATA_PATH='/home/yigittuncer/llm-training/artifacts/datasets/oscar-tr'
-
-wandb.login()
-config = {
-    "model_name": MODEL_NAME,
-}
-wandb.init(project="CPT", name=MODEL_NAME, config=config)
+DATA_PATH='/media/drive1/oscar-tr'
+WANDB=True
+if WANDB:
+    wandb.login()
+    config = {
+        "model_name": MODEL_NAME,
+    }
+    wandb.init(project="CPT", name=MODEL_NAME, config=config)
 
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name = MODEL_NAME,
@@ -104,7 +105,11 @@ trainer = UnslothTrainer(
         lr_scheduler_type = "linear",
         seed = 42,
         output_dir = OUTPUT_DIR,
-        report_to = "wandb", # Use this for WandB etc
+        report_to = "wandb" if WANDB else None,
+        save_total_limit = 3,
+        save_strategy = "steps",
+        save_steps = 1000,
+        
     ),
 )
 

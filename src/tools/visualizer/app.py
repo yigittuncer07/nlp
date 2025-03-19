@@ -150,9 +150,7 @@ def get_colors():
         "label_colors": label_colors
     })
 
-if __name__ == "__main__":
-    MODEL_PATH="turkishnlp/UNllama3.2-1b-instruct-ner-wikiann"
-    global ner_engine
-    ner_engine = UnllamaNerInferenceEngine(MODEL_PATH, id2label)
-    
-    app.run(debug=True)
+MODEL_PATH = "turkishnlp/UNllama3.2-3b-instruct-ner-wikiann"
+ner_engine = UnllamaNerInferenceEngine(MODEL_PATH, id2label) 
+
+app.run(debug=True, port=5001, use_reloader=False)

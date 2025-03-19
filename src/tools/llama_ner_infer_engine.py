@@ -15,6 +15,7 @@ class BaseNERInferenceEngine():
             label2id=self.label2id
         )
         self.model.to('cuda')
+        print("model loaded succesfully")
 
     # There probably are more elegant ways to implement this, without using the tokenizers start words like I did, but this also works
     def infer_labels(self, tokens, max_length=256):

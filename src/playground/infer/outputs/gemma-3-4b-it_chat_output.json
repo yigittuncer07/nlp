@@ -1,0 +1,205 @@
+{
+    "model": "unsloth/gemma-3-4b-it",
+    "inferences": [
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nHırsızlık suçunun cezası nedir?",
+            "llm_response": "Hırsızlık suçunun cezası, hırsızlığın ciddiyetine ve hırsızın geçmişine bağlı olarak değişir. Cezalar, para cezası, iş veya toplum hizmeti gibi hafif cezaları içerebilir, ancak daha ciddi durumlarda hapis cezası da uygulanabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nDolandırıcılık suçu nasıl oluşur?",
+            "llm_response": "Dolandırıcılık, bir kişinin bilerek, kasıtlı olarak veya aldatarak başkalarını aldatarak maddi veya başka bir menfaati elde ettiği bir suçtur. Bu, genellikle bir sözleşme veya yasal yükümlülüğü ihlal etmeyi içerir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nZorla birine senet imzalatmak hangi suçu oluşturur?",
+            "llm_response": "Zorla birine senet imzalatmak, zorla malvarlığını almayı veya bir yükümlülüğü yerine getirmeyi amaçlayan dolandırıcılık suçunu oluşturur. Bu durum, mağdurun iradesinin zorla kullanılmasıyla işlenir ve ceza hukuku açısından önemli sonuçlar doğurabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTrafik kazasında kusurlu tarafın cezai sorumluluğu nedir?",
+            "llm_response": "Trafik kazasında kusurlu taraf, ihmalinin kazaya neden olduğu tespit edilirse, cezai sorumluluğa yükümlü olabilir ve para cezası, hapis cezası veya iş terk etme gibi cezalarla karşı karşıya kalabilir. Bu, özellikle ölüm veya ciddi yaralanmaya neden olan kazalarda geçerlidir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBaşkasının telefonunu izinsiz dinlemek suç mu?",
+            "llm_response": "Evet, başkasının telefonunu izinsiz dinlemek, hem ceza kanunlarına göre suçtur hem de özel hayatın gizliliğini ihlal etmesi nedeniyle etik dışıdır. Bu tür bir davranış, kişilerin özel bilgilerini öğrenme ve takip etme hakkını ihlal eder."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBaşkasına ait sosyal medya hesabına izinsiz girmek suç mudur?",
+            "llm_response": "Evet, başkasına ait sosyal medya hesabına izinsiz girmek, kişisel verilerin korunması yasası ve siber suçlarla ilgili yasal düzenlemelerle suç sayılabilir. Bu tür eylemler, hesabın sahibinin özel hayatına müdahale, kişisel verilerin kötüye kullanılması ve dolayısıyla cezai yaptırımlara tabi olabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nAlkol alıp araba kullanmak suç mudur?",
+            "llm_response": "Evet, alkol alıp araba kullanmak suçtur ve trafik güvenliğini tehlikeye atar. Bu eylem, trafik güvenliği kanunlarına aykırıdır ve cezai yaptırımlara yol açabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTehdit suçu nasıl oluşur?",
+            "llm_response": "Tehdit suçu, bir kişinin başka bir kişiye zarar verme tehdidinde bulunmasıyla oluşur. Tehdit, gerçek bir zarar verme niyetiyle birlikte, mağdurda makul bir korku yaratacak şekilde olmalıdır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nCinsel taciz suçu nedir?",
+            "llm_response": "Cinsel taciz, bir kişinin rızası olmadan cinsel bir davranışta bulunması veya cinsel bir davranış hakkında rahatsız edici veya istenmeyen ifadeler kullanmasıdır. Bu tür davranışlar, mağdurun fiziksel veya psikolojik sağlığını ciddi şekilde etkileyebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nÇek ve senetlerde sahtecilik yapmak suç mudur?",
+            "llm_response": "Evet, çek ve senetlerde sahtecilik yapmak kesinlikle suçtur ve ciddi cezalarla sonuçlanabilir. Bu tür faaliyetler, finansal sisteme müdahale etme, dolandırıcılık ve hırsızlık gibi çeşitli suçlara dahil olabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBoşanma davası hangi sebeplerle açılabilir?",
+            "llm_response": "Boşanma davası, genellikle şiddetli anlaşmazlıklar, aldatma, terk edilmişlik veya rızai boşanma gibi nedenlerle açılabilir. Ayrıca, bazı psikolojik rahatsızlıklar veya dini inançlar nedeniyle de boşanma talep edilebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nÇocukların velayeti kime verilir?",
+            "llm_response": "Çocukların velayeti genellikle çocukların en iyi çıkarlarına hizmet etmeyi amaçlayan anne ve babaya verilir. Ancak, velayetin bir ebeveynin diğerine verilmesi veya bir başkasına devredilmesi gibi durumlar da olabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nNafaka türleri nelerdir?",
+            "llm_response": "Nafaka türleri genel olarak bakma nafaka, ortak nafaka, çocuk nafaka ve bakım nafaka olarak sınıflandırılır. Bu nafaka türleri, nafaka alıcısı ve vericinin durumuna ve hak ettikleri ilişkiye göre değişiklik gösterebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nMiras paylaşımında saklı pay nasıl hesaplanır?",
+            "llm_response": "Miras payı, miras bırakan kişinin malvarlığının, mirasın mirasçılarına dağıtılacak kısmına oranıdır. Bu oran, miras sözleşmesi, kanuni miras kuralları veya vasiyetname gibi çeşitli faktörlere bağlı olarak hesaplanır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nEvlat edinme işlemi nasıl gerçekleşir?",
+            "llm_response": "Evlat edinme işlemi, mahkemede yapılan bir süreçtir ve genellikle bir aile, bir çocukla resmi olarak bir bağ kurmak için başvurur. Bu süreç, çocukların ve potansiyel ebeveynlerin uygunluklarını değerlendiren bir dizi değerlendirme, görüşme ve mahkeme kararıyla tamamlanır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nEvlilik dışı doğan çocuğun babası nasıl belirlenir?",
+            "llm_response": "Evlilik dışı doğan çocuğun babası, genellikle çocuğun ve potansiyel babaların ifadeleri, kanıtlar ve DNA testleri gibi çeşitli kanıtların birleştirilmesiyle belirlenir. Bu süreç, yasal prosedürler ve mahkeme kararları doğrultusunda yürütülür."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nAile konutu şerhi nasıl konur?",
+            "llm_response": "Aile konutu şerhi, genellikle bir gayrimenkulün değerlemesinin, aile konutu olarak kabul edilen bir mülkün değerini içerecek şekilde düzenlenmesiyle konulur. Bu şerh, gayrimenkulün değerlemesinin, aile konutu olarak kabul edilen mülkün değerini hesaba katması için potansiyel alıcılara ve kredi verenlere bilgi verir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nVesayet davası hangi durumlarda açılır?",
+            "llm_response": "Vesayet davası, bir kişinin kendi kendine bakmakta veya başkalarını yönetememekte olduğu durumlarda, yani akıl veya sağlığının bu şekilde olumsuz etkilenmesi nedeniyle açılır. Bu durumlar arasında delilik, akıl hastalığı, yaşlılık veya sakatlık yer alır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nMal rejimi nasıl belirlenir ve sona erer?",
+            "llm_response": "Mal rejimi, bir ürünün veya hizmetin belirli bir zaman dilimi için kabul edilebilir olduğu ürünlerin ve hizmetlerin bir listesidir. Mal rejimi, genellikle bir ürünün veya hizmetin fiyatı, kalitesi veya kullanılabilirliği gibi faktörlere göre belirlenir ve bir ürünün veya hizmetin talebi veya arzı değiştiğinde sona erer."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nNişanın bozulması halinde hediyeler geri alınabilir mi?",
+            "llm_response": "Genellikle, nişan hediyesi geri alınamaz, çünkü nişan bir taahhüt ve bir bağlılık sembolüdür. Ancak, hediyenin satın alınması veya üretilmesi için bir geri ödeme veya iade sözleşmesi varsa, bu sözleşme geçerliyse geri alınabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nHaksız fiil nedeniyle tazminat davası nasıl açılır?",
+            "llm_response": "Haksız fiil nedeniyle tazminat davası açmak için, öncelikle haksız fiilin ne olduğunu ve bu fiil nedeniyle oluşan zararı belirlemeniz gerekir. Daha sonra, bu konuda bir avukata danışarak dava dilekçesini hazırlattıktan sonra, ilgili mahkemeye başvurarak davanızı açabilirsiniz."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBorçlu borcunu zamanında ödemezse alacaklı hangi hukuki yollara başvurabilir?",
+            "llm_response": "Borçlu borcunu zamanında ödemezse, alacaklı icra takibi, davadan feragat veya sözleşmede öngörülen fesih gibi hukuki yollara başvurabilir. Bu yollar, alacaklının borçludan alacak parasını tahsil etmesini amaçlar."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nKira sözleşmesi hangi durumlarda sona erdirilebilir?",
+            "llm_response": "Kira sözleşmesi, kiracı veya ev sahibi tarafından sözleşmedeki ihlaller, kira bedellerinin ödenmemesi veya tarafların karşılıklı mutabakatı gibi belirli durumlarda sona getirilebilir. Bu durumlar, yasalara ve sözleşmeye bağlı olarak değişebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nAyıplı mal veya hizmet satın alan tüketici hangi hukuki yollara başvurabilir?",
+            "llm_response": "Ayıplı mal veya hizmet satın alan bir tüketici, ürünün kusurlu olduğunu iddia ederek satıcıya karşı tazminat talep edebilir veya ürünü iade isteyebilir. Ayrıca, tüketici hakları yasaları uyarınca, sorumlu bir sigorta şirketinden veya devlet tarafından sağlanan bir tazminat mekanizmasından da destek alabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nKefil olduğu borç nedeniyle ödeme yapmak zorunda kalan kişi, asıl borçludan nasıl geri ödeme talep edebilir?",
+            "llm_response": "Kefil, borçludan asıl borçtan geri ödeme talep edebilir; ancak, borçlunun kefillik sözleşmesinde bu konuda bir hüküm olup olmadığını kontrol etmelidir. Eğer sözleşmede kefillik ödemesiyle ilgili bir düzenleme varsa, bu hükme uymak zorundadır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nSözleşmenin feshi hangi şartlarda mümkündür?",
+            "llm_response": "Sözleşme, tarafların karşılıklı mutabakatıyla, sözleşmede açıkça belirtilen fesih şartlarına uyulmasıyla veya ağır bir ihlal durumunda feshedilebilir. Ayrıca, yasal düzenlemelerdeki şartlara da uyulması halinde sözleşme feshedilebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nHaksız zenginleşme nedeniyle dava nasıl açılır?",
+            "llm_response": "Haksız zenginleşme davası açmak için, zararınızın karşı tarafın eylemleri veya ihmali nedeniyle meydana geldiğini ve karşı tarafın size karşı bir yükümlülük oluşturduğunu kanıtlamanız gerekir. Bu, bir avukata danışarak ve gerekli belgeleri sunarak yapılabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nİş sözleşmesi hangi sebeplerle sona erdirilebilir?",
+            "llm_response": "İş sözleşmesi, taraflardan herhangi birinin haklı bir sebaba dayanması durumunda veya işveren tarafından iş akdini sona erdirme nedenlerine sahip olduğunda sona erdirilebilir. Sona erme nedenleri arasında performans düşüklüğü, disiplin cezası, işin gereksiz hale gelmesi veya işverenin haklı bir neden göstermesi yer alabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nEser sözleşmesine aykırılık nedeniyle yükleniciye karşı hangi davalar açılabilir?",
+            "llm_response": "Eser sözleşmesine aykırılık nedeniyle yükleniciye karşı, sözleşme ihlali davası, zarara neden olma davası ve iş durma davası gibi davalar açılabilir. Bu davalar, yüklenicinin yükleniciye karşı yükümlülüklerini yerine getirmemesinden kaynaklanan zararların tazmin edilmesini veya sözleşmenin ihlalinin düzeltilmesini amaçlar."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir kişinin başkasına verdiği vekalet hangi durumlarda sona erer?",
+            "llm_response": "Vekalet, vekilin görev süresinin sona ermesi, vekilin iradesiyle sona ermesi veya vekilin vekalet görevini yerine getirememesi gibi durumlarda sona erer. Ayrıca, vekilin vekalet görevini yerine getirmesi için bir sebep olması veya vekilin vekaleti geri alması da vekaletin sona ermesine neden olabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir şirket ortağı şirketten çıkmak istediğinde hangi hukuki yolları kullanabilir?",
+            "llm_response": "Bir şirket ortağı şirketten çıkmak için öncelikle ortaklık sözleşmesini inceleyebilir, ardından mahkemede ortaklık feshi davası açabilir veya ortaklık sözleşmesinde belirtilen şartlara uygun olarak şirketten çıkış yapabilir. Bu yollar, ortağın çıkış nedenine ve şirket arasındaki ilişkiye bağlı olarak değişebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nHaksız rekabet nedeniyle nasıl dava açılabilir?",
+            "llm_response": "Haksız rekabet nedeniyle dava açmak için, rekabet yasalarına uygun olmayan bir eylemin, rekabeti bozan veya tüketiciler için zararlı olan bir etkisi olduğunu kanıtlamanız gerekir. Bu tür bir davayı açmak için, bir rekabet uzmanına danışmanız ve ilgili rekabet kurumlarına başvurmanız önemlidir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nŞirketin iflası durumunda alacaklılar ne yapabilir?",
+            "llm_response": "Şirketin iflası durumunda alacaklılar, iflas sürecinde haklarını arayabilirler, bu genellikle borçlarını tahsil etmek için davalara açmak, alacaklarını önceliklendirmek veya iflas kurtarma sürecinde bir pay almak anlamına gelir. Ayrıca, alacaklarını kısmen veya tamamen tahsil etmek için iflas mahkemesine başvurabilirler."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir anonim şirketin yönetim kurulu üyeleri hangi durumlarda sorumlu tutulabilir?",
+            "llm_response": "Anonim şirketin yönetim kurulu üyeleri, şirketin zarar görmesine veya yasal yükümlülüklere uymamasına neden olan eylemleri veya eksiklikleri nedeniyle sorumlu tutulabilir. Bu, kötü niyetli veya dikkatsizlikten kaynaklanan eylemler dahil olmak üzere çeşitli durumlarda olabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTicari sırların izinsiz ifşası halinde hangi hukuki süreç işletilebilir?",
+            "llm_response": "Ticari sırların izinsiz ifşası durumunda, tacir adına müeyyeden amir hükmü uygulanabilir ve davacı, ifşadan kaynaklanan zararlar için tazminata hükme getirilerek davanın açılmasına karar verilebilir. Ayrıca, bu tür fiillerin ceza kanunlarına göre de suç teşkil etmesi mümkündür."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nŞirket birleşmelerinde ortakların hakları nasıl korunur?",
+            "llm_response": "Şirket birleşmelerinde ortakların hakları, birleşme sürecinde hisselerinin değerinin ve potansiyel getirilerinin korunmasını sağlamak için genellikle sözleşmeler, özel hükümler ve bağımsız denetçiler aracılığıyla güvence altına alınır. Bu, mevcut sahiplik oranlarını korumayı, öncelikli hakları ve diğer önemli hakları sağlamayı içerir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir malın teslim edilmemesi durumunda alıcı hangi haklara sahiptir?",
+            "llm_response": "Alıcı, malın teslim edilmemesi durumunda, satıcıdan malın teslim edilmesini talep etme, tazminat talep etme veya sözleşmeden dönme (fesih) hakkına sahiptir. Bu haklar, alıcının yükümlülüklerini yerine getirmemesi nedeniyle alıcıya sağlanan zararı telafi etmek için tasarlanmıştır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nLimited şirketlerde ortaklar hangi durumlarda şirketin feshini talep edebilir?",
+            "llm_response": "Limited şirketlerde ortaklar, şirketin faaliyetlerini yürütmede yönetimsel hatalar, yönetimsel kötüye kullanım veya şirketin değerini zedeleyen eylemler gibi ciddi ihlaller durumunda şirketin feshi için dava açabilir. Ayrıca, ortakların haklarının ihlal edildiğini veya şirketin işlevsiz hale geldiğini iddia eden diğer yasal nedenler de olabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nÇekte karşılıksızdır işlemi uygulanması halinde hangi hukuki yollar izlenebilir?",
+            "llm_response": "Çekte karşılıksızlık işlemi uygulanması durumunda, şikayetçi kişi, muhatabın banka aracılığıyla tahliye talebinde bulunarak davayı açabilir ve karşılıksızlık işleminin hukuka uygun olup olmadığını yargısal olarak belirletebilir. Ayrıca, muhatabın banka hesabına yapılan ödemelerin geri alınması için de yasal yollara başvurulabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir gemi kazasında zarar gören kişi hangi hukuki yolları kullanabilir?",
+            "llm_response": "Bir gemi kazasında zarar gören kişi, denizcilik hukuku, sözleşme hukuku ve talep sorumluluğu gibi çeşitli yasal yolları kullanabilir. Bu yollar arasında tazminat talepleri, sözleşme ihlali davaları ve denizcilik sigortası talepleri yer alabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nAyıplı mal satın alan tüketici hangi haklara sahiptir?",
+            "llm_response": "Ayıplı mal satın alan tüketici, ayıplı malın giderilmesini, onarılmasını veya bedelinin karşılığı yeni bir mal ile değiştirilmesini isteyebilir. Ayrıca, zararlarının tazmin edilmesini veya satın alma bedelini iade talep edebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTüketici, satıcının kendisine haksız şartlar içeren bir sözleşme imzalattığını fark ederse ne yapabilir?",
+            "llm_response": "Tüketici, haksız şartlı sözleşmeyi iptal ettirme veya şartların düzeltilmesini talep etme hakkına sahiptir. Bu durumda, sözleşmenin iptalini talep etmek için tüketici hakları kurulu veya bir tüketici dosyası açabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir tüketici, mesafeli satış (internet alışverişi) sonrası cayma hakkını nasıl kullanabilir?",
+            "llm_response": "Tüketici, mesafeli satış sonrası cayma hakkını, satıcıya yazılı bir bildirimde bulunarak ve cayma bildiriminde belirtilen miktarı ödemeyi satıcıya göndererek kullanabilir. Bildirimde, cayma hakkını kullanmak istediğini ve siparişin geri alınmasını istediğini açıkça belirtmelidir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBir hizmetin ayıplı olduğu tespit edilirse tüketici hangi haklara sahiptir?",
+            "llm_response": "Bir hizmetin ayıplı olduğu tespit edilirse tüketici, ayıplı hizmetin bedelini iade ettirilme, ayıplı hizmetin onarılmasını veya yenisini verilmesini, ya da sözleşmeden dönme hakkına sahiptir. Ayrıca, ayıplı hizmetten kaynaklanan zararlar için de tazminat talep edebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTicari reklamlarda aldatıcı beyanlar bulunması durumunda tüketici ne yapabilir?",
+            "llm_response": "Ticari reklamlarda aldatıcı beyanlar tespit edilirse, tüketici tüketici hakem heyetine başvurabilir veya reklamı yapan şirkete karşı dava açabilir. Ayrıca, reklamın yanıltıcı olduğunu belirten bir şikayet de gönderebilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nBankalar tarafından haksız yere alınan dosya masrafları için tüketici hangi hukuki yolu izleyebilir?",
+            "llm_response": "Tüketiciler, bankaların haksız yere aldığı dosya masrafları için bankaya itiraz ederek veya tüketici mahkemesine dava açarak hukuki yol izleyebilirler. Ayrıca, bankanın itirazını reddettiği durumlarda, şikayetlerini ilgili bankacılık kurumu olan Bankacılık Düzenleme ve Denetleme Kurumu'na (BDDK) iletebilirler."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nKapıdan satış yoluyla alınan bir ürün için tüketici cayma hakkını kullanabilir mi?",
+            "llm_response": "Evet, kapıdan satış yoluyla alınan bir ürün için tüketici, belirli bir süre içinde (genellikle 14 gün) cayma hakkını kullanabilir. Bu hak, ürünün kapıdan teslim alındığı andan itibaren geçerlidir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTüketici, satış sonrası verilen garantinin yerine getirilmediğini fark ederse ne yapabilir?",
+            "llm_response": "Tüketici, garanti hizmetinin yerine getirilmemesi durumunda, öncelikle satıcıyla iletişime geçerek durumu çözmeye çalışabilir. Eğer satıcı çözüm üretmezse, tüketici haklarını korumak için Tüketici Hakem Heyeti'ne veya Tüketici Mahkemesi'ne başvurabilir."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nTüketici, devre tatil sözleşmesini iptal etmek istediğinde hangi haklara sahiptir?",
+            "llm_response": "Bir tüketici, devre tatil sözleşmesini iptal etmek istediğinde, sözleşme şartlarına bağlı olarak, sözleşme şartlarını ihlal etmeyen bir sebep sunarak veya sözleşmeyi iptal etme hakkını talep ederek hakları vardır. İptal talebi, sözleşme şartlarına ve ilgili yasal düzenlemelere uygun olarak yapılmalıdır."
+        },
+        {
+            "user_query": "Soruya en fazla 2 cumle ile cevap ver:\nİşçi, fazla mesai ücreti ödenmediğinde ne yapabilir?",
+            "llm_response": "İşçi, fazla mesai ücreti ödenmediğinde öncelikle işverenine yazılı olarak başvurarak ücretinin ödenmesini talep edebilir. Eğer işveren bu talebi yerine getirmezse, işçi iş bulma hakkı ve ücret almayı talep etme hakkı gibi yasal haklarını kullanmak için iş mahkemesine başvurabilir."
+        }
+    ]
+}

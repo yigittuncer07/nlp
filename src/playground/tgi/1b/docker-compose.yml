@@ -1,0 +1,32 @@
+services:
+  tgi:
+    image: ghcr.io/huggingface/text-generation-inference:3.0.1
+    command:
+      - "--model-id meta-llama/Llama-3.2-1B-Instruct"
+      
+      - "--num-shard 1"
+      
+      - "--max-input-tokens 3000"
+      - "--max-total-tokens 4000"
+      - "--max-batch-prefill-tokens 3000"
+      - "--max-batch-total-tokens 4000"
+      - "--max-concurrent-requests 1"           
+
+    shm_size: '1g'
+    volumes:
+      - /home/yigittuncer/.cache/huggingface/hub:/data/hub
+    ports:
+      - "1410:80"
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - USE_PREFIX_CACHING=0
+      - PREFIX_CACHING=0
+    restart: unless-stopped
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ '3' ]
+              capabilities: [ gpu ]

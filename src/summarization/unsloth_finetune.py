@@ -74,13 +74,13 @@ trainer = SFTTrainer(
     dataset_text_field = "text",
     max_seq_length = max_seq_length,
     data_collator = DataCollatorForSeq2Seq(tokenizer = tokenizer),
-    dataset_num_proc = 2,
+    dataset_num_proc = 8,
     packing = False, # Can make training 5x faster for short sequences.
     args = TrainingArguments(
-        per_device_train_batch_size = 2,
-        gradient_accumulation_steps = 4,
+        per_device_train_batch_size = 1,
+        gradient_accumulation_steps = 2,
         warmup_steps = 5,
-        num_train_epochs = 1, # Set this for 1 full training run.
+        num_train_epochs = 3, # Set this for 1 full training run.
         learning_rate = 2e-4,
         fp16 = not is_bfloat16_supported(),
         bf16 = is_bfloat16_supported(),
@@ -89,7 +89,7 @@ trainer = SFTTrainer(
         weight_decay = 0.01,
         lr_scheduler_type = "linear",
         seed = 3407,
-        output_dir = "outputs",
+        output_dir = SAVE_PATH,
         report_to = "none", # Use this for WandB etc
     ),
 )
@@ -142,7 +142,7 @@ tokenizer = get_chat_template(
 FastLanguageModel.for_inference(model) # Enable native 2x faster inference
 
 messages = [
-    {"role": "user", "content": "Continue the fibonnaci sequence: 1, 1, 2, 3, 5, 8,"},
+    {"role": "user", "content": "Keyifler nasil?"},
 ]
 inputs = tokenizer.apply_chat_template(
     messages,
@@ -155,34 +155,8 @@ outputs = model.generate(input_ids = inputs, max_new_tokens = 64, use_cache = Tr
                          temperature = 1.5, min_p = 0.1)
 tokenizer.batch_decode(outputs)
 
-""" You can also use a `TextStreamer` for continuous inference - so you can see the generation token by token, instead of waiting the whole time!"""
-
-FastLanguageModel.for_inference(model) # Enable native 2x faster inference
-
-messages = [
-    {"role": "user", "content": "Continue the fibonnaci sequence: 1, 1, 2, 3, 5, 8,"},
-]
-inputs = tokenizer.apply_chat_template(
-    messages,
-    tokenize = True,
-    add_generation_prompt = True, # Must add for generation
-    return_tensors = "pt",
-).to("cuda")
-
-from transformers import TextStreamer
-text_streamer = TextStreamer(tokenizer, skip_prompt = True)
-_ = model.generate(input_ids = inputs, streamer = text_streamer, max_new_tokens = 128,
-                   use_cache = True, temperature = 1.5, min_p = 0.1)
-
-"""<a name="Save"></a>
-### Saving, loading finetuned models
-To save the final model as LoRA adapters, either use Huggingface's `push_to_hub` for an online save or `save_pretrained` for a local save.
-
-**[NOTE]** This ONLY saves the LoRA adapters, and not the full model. To save to 16bit or GGUF, scroll down!
-"""
-
-model.save_pretrained("lora_model")  # Local saving
-tokenizer.save_pretrained("lora_model")
+model.save_pretrained(f"{SAVE_PATH}/final")  # Local saving
+tokenizer.save_pretrained(f"{SAVE_PATH}/final")
 # model.push_to_hub("your_name/lora_model", token = "...") # Online saving
 # tokenizer.push_to_hub("your_name/lora_model", token = "...") # Online saving
 
@@ -198,28 +172,13 @@ if False:
     )
     FastLanguageModel.for_inference(model) # Enable native 2x faster inference
 
-messages = [
-    {"role": "user", "content": "Describe a tall tower in the capital of France."},
-]
-inputs = tokenizer.apply_chat_template(
-    messages,
-    tokenize = True,
-    add_generation_prompt = True, # Must add for generation
-    return_tensors = "pt",
-).to("cuda")
-
-from transformers import TextStreamer
-text_streamer = TextStreamer(tokenizer, skip_prompt = True)
-_ = model.generate(input_ids = inputs, streamer = text_streamer, max_new_tokens = 128,
-                   use_cache = True, temperature = 1.5, min_p = 0.1)
-
 """### Saving to float16 for VLLM
 
 We also support saving to `float16` directly. Select `merged_16bit` for float16 or `merged_4bit` for int4. We also allow `lora` adapters as a fallback. Use `push_to_hub_merged` to upload to your Hugging Face account! You can go to https://huggingface.co/settings/tokens for your personal tokens.
 """
 
 # Merge to 16bit
-if False: model.save_pretrained_merged("model", tokenizer, save_method = "merged_16bit",)
+model.save_pretrained_merged(f"{SAVE_PATH}/final_merged", tokenizer, save_method = "merged_16bit",)
 if False: model.push_to_hub_merged("hf/model", tokenizer, save_method = "merged_16bit", token = "")
 
 # Just LoRA adapters

@@ -1,7 +1,8 @@
 from unsloth import FastLanguageModel
 import torch
-SAVE_PATH = "./"
+SAVE_PATH = "/home/nlp/projects/nlp/artifacts/models"
 MODEL_NAME = "unsloth/Llama-3.2-3B-Instruct"
+SAVE_PATH = f"SAVE_PATH/{MODEL_NAME.split("/")[-1]}"
 DATASET_NAME = "turkishnlp/turkish_summarization"
 max_seq_length = 4096 # Choose any! We auto support RoPE Scaling internally!
 dtype = None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
@@ -38,30 +39,44 @@ tokenizer = get_chat_template(
     chat_template = "llama-3.1",
 )
 
+def format(example):
+    return {
+        "conversations": [
+            {"role": "system", "content": "Sen yardımcı bir asistansın, verilen metni özetle."},
+            {"role": "user", "content": f"{example['input']}"},
+            {"role": "assistant", "content": example["output"]}
+        ]
+    }
+
+
 def formatting_prompts_func(examples):
     convos = examples["conversations"]
     texts = [tokenizer.apply_chat_template(convo, tokenize = False, add_generation_prompt = False) for convo in convos]
     return { "text" : texts, }
 
+
+def drop_long_examples(examples):
+    texts  = examples["text"]
+    outputs = []
+    
+    for text in texts:
+        tokenized = tokenizer(text, truncation=False, return_length=True, )
+        if tokenized["length"][0] < max_seq_length - 3:
+            outputs.append(text)
+    
+    return { "text": outputs }
+
 from datasets import load_dataset
 dataset = load_dataset(DATASET_NAME, split = "train")
+dataset.shuffle(seed = 2523)
 
-from unsloth.chat_templates import standardize_sharegpt
-dataset = standardize_sharegpt(dataset)
+dataset = dataset.select(range(0,100))
+
+dataset = dataset.map(format, batched = False, )
 dataset = dataset.map(formatting_prompts_func, batched = True,)
-
-"""We look at how the conversations are structured for item 5:"""
-
-print(dataset[5]["conversations"])
-
-"""And we see how the chat template transformed these conversations.
-
-**[Notice]** Llama 3.1 Instruct's default chat template default adds `"Cutting Knowledge Date: December 2023\nToday Date: 26 July 2024"`, so do not be alarmed!
-"""
+dataset = dataset.map(drop_long_examples, batched = True, )
 
 print(dataset[5]["text"])
-
-breakpoint()
 
 from trl import SFTTrainer
 from transformers import TrainingArguments, DataCollatorForSeq2Seq
@@ -74,11 +89,11 @@ trainer = SFTTrainer(
     dataset_text_field = "text",
     max_seq_length = max_seq_length,
     data_collator = DataCollatorForSeq2Seq(tokenizer = tokenizer),
-    dataset_num_proc = 2,
+    dataset_num_proc = 16,
     packing = False, # Can make training 5x faster for short sequences.
     args = TrainingArguments(
-        per_device_train_batch_size = 2,
-        gradient_accumulation_steps = 4,
+        per_device_train_batch_size = 1,
+        gradient_accumulation_steps = 2,
         warmup_steps = 5,
         num_train_epochs = 1, # Set this for 1 full training run.
         learning_rate = 2e-4,
@@ -89,7 +104,7 @@ trainer = SFTTrainer(
         weight_decay = 0.01,
         lr_scheduler_type = "linear",
         seed = 3407,
-        output_dir = "outputs",
+        output_dir = SAVE_PATH,
         report_to = "none", # Use this for WandB etc
     ),
 )
@@ -112,26 +127,7 @@ print(tokenizer.decode([space if x == -100 else x for x in trainer.train_dataset
 
 """We can see the System and Instruction prompts are successfully masked!"""
 
-gpu_stats = torch.cuda.get_device_properties(0)
-start_gpu_memory = round(torch.cuda.max_memory_reserved() / 1024 / 1024 / 1024, 3)
-max_memory = round(gpu_stats.total_memory / 1024 / 1024 / 1024, 3)
-print(f"GPU = {gpu_stats.name}. Max memory = {max_memory} GB.")
-print(f"{start_gpu_memory} GB of memory reserved.")
-
 trainer_stats = trainer.train()
-
-used_memory = round(torch.cuda.max_memory_reserved() / 1024 / 1024 / 1024, 3)
-used_memory_for_lora = round(used_memory - start_gpu_memory, 3)
-used_percentage = round(used_memory / max_memory * 100, 3)
-lora_percentage = round(used_memory_for_lora / max_memory * 100, 3)
-print(f"{trainer_stats.metrics['train_runtime']} seconds used for training.")
-print(
-    f"{round(trainer_stats.metrics['train_runtime']/60, 2)} minutes used for training."
-)
-print(f"Peak reserved memory = {used_memory} GB.")
-print(f"Peak reserved memory for training = {used_memory_for_lora} GB.")
-print(f"Peak reserved memory % of max memory = {used_percentage} %.")
-print(f"Peak reserved memory for training % of max memory = {lora_percentage} %.")
 
 from unsloth.chat_templates import get_chat_template
 

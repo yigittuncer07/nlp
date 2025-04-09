@@ -1,9 +1,21 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from unsloth import FastLanguageModel
-import torch
-SAVE_PATH = "/home/nlp/projects/nlp/artifacts/models"
-MODEL_NAME = "unsloth/Llama-3.2-3B-Instruct"
-SAVE_PATH = f"SAVE_PATH/{MODEL_NAME.split("/")[-1]}"
+from datasets import load_dataset
+from unsloth.chat_templates import get_chat_template
+from trl import SFTTrainer
+from transformers import TrainingArguments, DataCollatorForSeq2Seq
+from unsloth import is_bfloat16_supported
+
+MODEL_NAME = "google/gemma-3-1b-it"
 DATASET_NAME = "turkishnlp/turkish_summarization"
+EVAL_DATASET_NAME = "turkishnlp/turkish_summarization"
+TRAIN_ON_COMPLETION_ONLY = False
+HF_URL="" # "your_name/lora_model" # Set this to push to HuggingFace Hub
+
+SAVE_PATH = "/home/nlp/projects/nlp/artifacts/models"
+SAVE_PATH = f"SAVE_PATH/{MODEL_NAME.split("/")[-1]}"
 max_seq_length = 4096 # Choose any! We auto support RoPE Scaling internally!
 dtype = None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
 load_in_4bit = False # Use 4bit quantization to reduce memory usage. Can be False.
@@ -14,8 +26,6 @@ model, tokenizer = FastLanguageModel.from_pretrained(
     dtype = dtype,
     load_in_4bit = load_in_4bit,
 )
-
-"""We now add LoRA adapters so we only need to update 1 to 10% of all parameters!"""
 
 model = FastLanguageModel.get_peft_model(
     model,
@@ -32,55 +42,37 @@ model = FastLanguageModel.get_peft_model(
     loftq_config = None, # And LoftQ
 )
 
-from unsloth.chat_templates import get_chat_template
-
-tokenizer = get_chat_template(
-    tokenizer,
-    chat_template = "llama-3.1",
-)
-
-def format(example):
-    return {
+def format_and_filter(example):
+    # Step 1: Format
+    convo = {
         "conversations": [
-            {"role": "system", "content": "Sen yardımcı bir asistansın, verilen metni özetle."},
+            {"role": "system", "content": f"{example['instruction']}"},
             {"role": "user", "content": f"{example['input']}"},
             {"role": "assistant", "content": example["output"]}
         ]
     }
 
+    # Step 2: Apply chat template
+    text = tokenizer.apply_chat_template(
+        convo["conversations"],
+        tokenize=False,
+        add_generation_prompt=False
+    )
 
-def formatting_prompts_func(examples):
-    convos = examples["conversations"]
-    texts = [tokenizer.apply_chat_template(convo, tokenize = False, add_generation_prompt = False) for convo in convos]
-    return { "text" : texts, }
+    # Step 3: Filter based on tokenized length
+    tokenized = tokenizer(text, truncation=False, return_length=True)
+    if tokenized["length"][0] < max_seq_length - 3:
+        return {"text": text}
+    else:
+        return {}  # filter
 
-
-def drop_long_examples(examples):
-    texts  = examples["text"]
-    outputs = []
-    
-    for text in texts:
-        tokenized = tokenizer(text, truncation=False, return_length=True, )
-        if tokenized["length"][0] < max_seq_length - 3:
-            outputs.append(text)
-    
-    return { "text": outputs }
-
-from datasets import load_dataset
-dataset = load_dataset(DATASET_NAME, split = "train")
-dataset.shuffle(seed = 2523)
-
-dataset = dataset.select(range(0,100))
-
-dataset = dataset.map(format, batched = False, )
-dataset = dataset.map(formatting_prompts_func, batched = True,)
-dataset = dataset.map(drop_long_examples, batched = True, )
+dataset = load_dataset(DATASET_NAME, split="train")
+dataset = dataset.shuffle(seed=2523)
+dataset = dataset.select(range(0, 100))
+dataset = dataset.map(format_and_filter, batched=False)
+dataset = dataset.filter(lambda x: "text" in x)  # Remove entries filtered out
 
 print(dataset[5]["text"])
-
-from trl import SFTTrainer
-from transformers import TrainingArguments, DataCollatorForSeq2Seq
-from unsloth import is_bfloat16_supported
 
 trainer = SFTTrainer(
     model = model,
@@ -106,77 +98,36 @@ trainer = SFTTrainer(
         seed = 3407,
         output_dir = SAVE_PATH,
         report_to = "none", # Use this for WandB etc
+        save_total_limit = 3,
+        save_strategy = "steps",
+        save_steps = 1000,
     ),
 )
 
-"""We also use Unsloth's `train_on_completions` method to only train on the assistant outputs and ignore the loss on the user's inputs."""
+if TRAIN_ON_COMPLETION_ONLY:
+    from unsloth.chat_templates import train_on_responses_only
+    trainer = train_on_responses_only(
+        trainer,
+        instruction_part = "<|start_header_id|>user<|end_header_id|>\n",
+        response_part = "<|start_header_id|>assistant<|end_header_id|>\n\n",
+    )
 
-from unsloth.chat_templates import train_on_responses_only
-trainer = train_on_responses_only(
-    trainer,
-    instruction_part = "<|start_header_id|>user<|end_header_id|>\n\n",
-    response_part = "<|start_header_id|>assistant<|end_header_id|>\n\n",
-)
+    """We verify masking is actually done:"""
 
-"""We verify masking is actually done:"""
+    print(tokenizer.decode(trainer.train_dataset[5]["input_ids"]))
 
-print(tokenizer.decode(trainer.train_dataset[5]["input_ids"]))
+    space = tokenizer(" ", add_special_tokens = False).input_ids[0]
+    print(tokenizer.decode([space if x == -100 else x for x in trainer.train_dataset[5]["labels"]]))
 
-space = tokenizer(" ", add_special_tokens = False).input_ids[0]
-print(tokenizer.decode([space if x == -100 else x for x in trainer.train_dataset[5]["labels"]]))
-
-"""We can see the System and Instruction prompts are successfully masked!"""
+    """We can see the System and Instruction prompts are successfully masked!"""
 
 trainer_stats = trainer.train()
 
-from unsloth.chat_templates import get_chat_template
-
-tokenizer = get_chat_template(
-    tokenizer,
-    chat_template = "llama-3.1",
-)
-FastLanguageModel.for_inference(model) # Enable native 2x faster inference
-
-messages = [
-    {"role": "user", "content": "Keyifler nasil?"},
-]
-inputs = tokenizer.apply_chat_template(
-    messages,
-    tokenize = True,
-    add_generation_prompt = True, # Must add for generation
-    return_tensors = "pt",
-).to("cuda")
-
-outputs = model.generate(input_ids = inputs, max_new_tokens = 64, use_cache = True,
-                         temperature = 1.5, min_p = 0.1)
-tokenizer.batch_decode(outputs)
-
-model.save_pretrained(f"{SAVE_PATH}/final")  # Local saving
+model.save_pretrained(f"{SAVE_PATH}/final")  
 tokenizer.save_pretrained(f"{SAVE_PATH}/final")
-# model.push_to_hub("your_name/lora_model", token = "...") # Online saving
-# tokenizer.push_to_hub("your_name/lora_model", token = "...") # Online saving
+model.save_pretrained_merged(f"{SAVE_PATH}/final_merged", tokenizer, save_method = "merged_16bit")
 
-"""Now if you want to load the LoRA adapters we just saved for inference, set `False` to `True`:"""
-
-if False:
-    from unsloth import FastLanguageModel
-    model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name = "lora_model", # YOUR MODEL YOU USED FOR TRAINING
-        max_seq_length = max_seq_length,
-        dtype = dtype,
-        load_in_4bit = load_in_4bit,
-    )
-    FastLanguageModel.for_inference(model) # Enable native 2x faster inference
-
-"""### Saving to float16 for VLLM
-
-We also support saving to `float16` directly. Select `merged_16bit` for float16 or `merged_4bit` for int4. We also allow `lora` adapters as a fallback. Use `push_to_hub_merged` to upload to your Hugging Face account! You can go to https://huggingface.co/settings/tokens for your personal tokens.
-"""
-
-# Merge to 16bit
-model.save_pretrained_merged(f"{SAVE_PATH}/final_merged", tokenizer, save_method = "merged_16bit",)
-if False: model.push_to_hub_merged("hf/model", tokenizer, save_method = "merged_16bit", token = "")
-
-# Just LoRA adapters
-if False: model.save_pretrained_merged("model", tokenizer, save_method = "lora",)
-if False: model.push_to_hub_merged("hf/model", tokenizer, save_method = "lora", token = "")
+if HF_URL:
+    model.push_to_hub("your_name/lora_model") # Online saving
+    tokenizer.push_to_hub("your_name/lora_model") # Online saving
+    model.push_to_hub_merged("hf/model", tokenizer, save_method = "merged_16bit")

@@ -1,10 +1,13 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import requests
 
-url = "http://localhost:8000/infer"  
+url = "http://localhost:8002/infer"  
 
 payload = {
     "system_prompt": "Sen yardımcı bir asistansın, verilen metni özetle.",
-    "user_prompt": "Merhaba, nasilsin.",
+    "user_prompt": "Merhaba, nasilsin. Ozetlemeye hazir misin!?",
     "temperature": 0.1,
     "max_tokens": 64
 }

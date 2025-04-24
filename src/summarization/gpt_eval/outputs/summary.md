@@ -10,6 +10,11 @@
 - **Median Score**: 3.0
 - **Standard Deviation**: 1.37
 
+## phi-4-mini-ykd-sft-5-epoch
+- **Average Score**: 3.34
+- **Median Score**: 3.5
+- **Standard Deviation**: 1.29
+
 ## gemma-1-ft
 - **Average Score**: 3.10
 - **Median Score**: 3.0

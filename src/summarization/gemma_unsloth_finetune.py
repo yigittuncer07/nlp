@@ -10,7 +10,7 @@ import time
 
 MODEL_NAME = "unsloth/gemma-3-4b-it" # CHANGE THIS
 DATASET_NAME = "/home/yigit/nlp/artifacts/datasets/summarization-ykd-data" # CHANGE THIS
-RUN_NAME = "gemma-3-4b-it-ykd-sft-hr" # CHANGE THIS
+RUN_NAME = "gemma-3-4b-it-ykd-sft-hr-long" # CHANGE THIS
 SAVE_PATH = "/home/yigit/nlp/artifacts/models"
 SAVE_PATH = f"{SAVE_PATH}/{RUN_NAME}"
 SYSTEM_PROMPT = "Sen yardımcı bir asistansın, verilen metni özetle."
@@ -85,19 +85,11 @@ eval_dataset = eval_dataset.filter(is_within_max_length)
 
 print(train_dataset[5]["text"])
 
-def formatting_func(example):
-    formatted = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": example["input"]},
-        {"role": "assistant", "content": example["output"]}
-    ]
-    
-    text = tokenizer.apply_chat_template(
-        formatted,
-        tokenize=False,
-        add_generation_prompt=False
-    )
-    return text
+per_device_train_batch_size = 2
+gradient_accumulation_steps = 4 
+epochs = 20
+
+steps_per_epoch = len(train_dataset) // (per_device_train_batch_size * gradient_accumulation_steps)
 
 from trl import SFTTrainer, SFTConfig
 trainer = SFTTrainer(
@@ -105,13 +97,14 @@ trainer = SFTTrainer(
     tokenizer = tokenizer,
     train_dataset = train_dataset,
     eval_dataset = eval_dataset,
-    # formatting_func= formatting_func,
     args = SFTConfig(
         dataset_text_field = "text",
-        per_device_train_batch_size = 2,
-        gradient_accumulation_steps = 4, # Use GA to mimic batch size!
+        per_device_train_batch_size = per_device_train_batch_size,
+        gradient_accumulation_steps = gradient_accumulation_steps, # Use GA to mimic batch size!
+        per_device_eval_batch_size = per_device_train_batch_size,
+        eval_accumulation_steps = 4,
         warmup_steps = 5,
-        num_train_epochs = 5,
+        num_train_epochs = epochs,
         learning_rate = 2e-5, # Reduce to 2e-5 for long training runs (2e-4 originally)
         logging_steps = 1,
         optim = "adamw_8bit",
@@ -119,11 +112,12 @@ trainer = SFTTrainer(
         lr_scheduler_type = "linear",
         seed = 3407,
         report_to = "wandb" if WANDB_ENABLED else "none",
-        save_total_limit = 2,
+        save_total_limit = epochs,
         save_strategy = "epoch",
-        # do_eval = True,
-        # eval_strategy = "epoch",
-        # eval_on_start = True,
+        do_eval = True,
+        eval_strategy = "steps",
+        eval_steps = steps_per_epoch // 5,
+        eval_on_start = True,
         output_dir = SAVE_PATH,
     ),
 )

@@ -10,7 +10,9 @@ import time
 
 MODEL_NAME = "unsloth/gemma-3-4b-it" # CHANGE THIS
 DATASET_NAME = "/home/yigit/nlp/artifacts/datasets/summarization-ykd-data" # CHANGE THIS
-RUN_NAME = "gemma-3-4b-it-ykd-sft-hr-long" # CHANGE THIS
+RUN_NAME = "gemma3-4b-it-ykd-sft-long-completion-only" # CHANGE THIS
+TRAIN_ON_COMPLETIONS = True # CHANGE THIS
+
 SAVE_PATH = "/home/yigit/nlp/artifacts/models"
 SAVE_PATH = f"{SAVE_PATH}/{RUN_NAME}"
 SYSTEM_PROMPT = "Sen yardımcı bir asistansın, verilen metni özetle."
@@ -133,8 +135,25 @@ time.sleep(7)
 model.config.text_config.use_cache = False
 trainer.model.config.use_cache = False
 
-trainer_stats = trainer.train()
+if TRAIN_ON_COMPLETIONS:
+    from unsloth.chat_templates import train_on_responses_only
+    trainer = train_on_responses_only(
+        trainer,
+        instruction_part = "<start_of_turn>user\n",
+        response_part = "<start_of_turn>model\n",
+    )
+    print('training on completions, train example:')
+    tokenizer.decode(trainer.train_dataset[100]["input_ids"])
+    print(tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.train_dataset[100]["labels"]]).replace(tokenizer.pad_token, " "))
+    
+    
+    print("training on completions, eval example:")
+    tokenizer.decode(trainer.eval_dataset[100]["input_ids"])
+    print(tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.eval_dataset[100]["labels"]]).replace(tokenizer.pad_token, " "))
 
+with torch.autograd.detect_anomaly(True):
+    trainer_stats = trainer.train()
+    
 model.save_pretrained(f"{SAVE_PATH}/final")  
 tokenizer.save_pretrained(f"{SAVE_PATH}/final")
 model.save_pretrained_merged(f"{SAVE_PATH}/final_merged", tokenizer, save_method = "merged_16bit")

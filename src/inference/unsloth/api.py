@@ -6,11 +6,11 @@ import torch
 
 app = FastAPI()
 
-model_name = "/home/yigit/nlp/artifacts/models/gemma-3-1b-it-ykd-sft-hr/final" 
-# model_name = "google/gemma-3-1b-it"
+model_name = "/media/drive3/yigit_artifacts/gemma3-4b-it-ykd-sft-2-epoch/final" 
+#model_name = "unsloth/gemma-3-4b-it"
 max_seq_length = 4096
-dtype = torch.float16
-
+dtype = torch.float32
+    
 model, tokenizer = FastModel.from_pretrained(
     model_name=model_name,
     max_seq_length=max_seq_length,
@@ -34,30 +34,38 @@ class InferenceRequest(BaseModel):
 @app.post("/infer")
 def infer(req: InferenceRequest):
     messages = []
+
     if req.system_prompt:
         messages.append({
             "role": "system",
             "content": [{"type": "text", "text": req.system_prompt}]
         })
+
     messages.append({
         "role": "user",
         "content": [{"type": "text", "text": req.user_prompt}]
     })
 
-    inputs = tokenizer.apply_chat_template(
+    # Format input using Unsloth's chat template with generation prompt
+    text = tokenizer.apply_chat_template(
         messages,
-        tokenize=True,
-        add_generation_prompt=True,
-        return_tensors="pt",
-    ).to("cuda")
-
-    outputs = model.generate(
-        input_ids=inputs,
-        max_new_tokens=req.max_tokens,
-        temperature=req.temperature,
-        use_cache=True,
+        add_generation_prompt=True  # Must add for generation
     )
 
+    # Tokenize the final prompt string
+    inputs = tokenizer([text], return_tensors="pt").to("cuda")
+
+    # Generate output using recommended Gemma-3 settings
+    outputs = model.generate(
+        **inputs,
+        max_new_tokens=req.max_tokens,
+        temperature=req.temperature,
+        top_p=0.95,
+        top_k=64,
+    )
+
+    # Decode and return response
     response = tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
     return {"response": response}
+
 

@@ -5,6 +5,11 @@
 - **Median Score**: 4.0
 - **Standard Deviation**: 1.05
 
+## gemma3-4b-it-ykd-sft-checkpoint1212-completion-ony
+- **Average Score**: 3.72
+- **Median Score**: 4.0
+- **Standard Deviation**: 1.20
+
 ## gemma-4-hr
 - **Average Score**: 3.40
 - **Median Score**: 3.0

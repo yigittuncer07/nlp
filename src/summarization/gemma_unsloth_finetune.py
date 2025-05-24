@@ -10,8 +10,8 @@ import time
 
 MODEL_NAME = "unsloth/gemma-3-4b-it" # CHANGE THIS
 DATASET_NAME = "/home/yigit/nlp/artifacts/datasets/summarization-ykd-data" # CHANGE THIS
-RUN_NAME = "gemma3-4b-it-ykd-sft-long-completion-only" # CHANGE THIS
-TRAIN_ON_COMPLETIONS = True # CHANGE THIS
+RUN_NAME = "gemma3-4b-it-ykd-sft-3-epoch" # CHANGE THIS
+TRAIN_ON_COMPLETIONS = False # CHANGE THIS
 
 SAVE_PATH = "/home/yigit/nlp/artifacts/models"
 SAVE_PATH = f"{SAVE_PATH}/{RUN_NAME}"
@@ -89,7 +89,7 @@ print(train_dataset[5]["text"])
 
 per_device_train_batch_size = 2
 gradient_accumulation_steps = 4 
-epochs = 20
+epochs = 3
 
 steps_per_epoch = len(train_dataset) // (per_device_train_batch_size * gradient_accumulation_steps)
 
@@ -136,6 +136,7 @@ model.config.text_config.use_cache = False
 trainer.model.config.use_cache = False
 
 if TRAIN_ON_COMPLETIONS:
+    print("TRAINING ON COMPLETIONS ONLY!")
     from unsloth.chat_templates import train_on_responses_only
     trainer = train_on_responses_only(
         trainer,
@@ -151,8 +152,8 @@ if TRAIN_ON_COMPLETIONS:
     tokenizer.decode(trainer.eval_dataset[100]["input_ids"])
     print(tokenizer.decode([tokenizer.pad_token_id if x == -100 else x for x in trainer.eval_dataset[100]["labels"]]).replace(tokenizer.pad_token, " "))
 
-with torch.autograd.detect_anomaly(True):
-    trainer_stats = trainer.train()
+# with torch.autograd.detect_anomaly(True):
+trainer_stats = trainer.train()
     
 model.save_pretrained(f"{SAVE_PATH}/final")  
 tokenizer.save_pretrained(f"{SAVE_PATH}/final")

@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "question": "Hırsızlık suçunun cezası nedir?",
+    "answer": "Hırsızlık suçu, başkasına ait bir malı rızası olmadan almak suretiyle işlenirse 1 yıldan 7 yıla kadar hapis cezası ile cezalandırılır.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 141"
+  },
+  {
+    "id": 2,
+    "question": "Dolandırıcılık suçu nasıl oluşur?",
+    "answer": "Bir kişiyi hileli davranışlarla kandırarak kendisine veya başkasına haksız menfaat sağlanması durumunda dolandırıcılık suçu oluşur.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 157"
+  },
+  {
+    "id": 3,
+    "question": "Zorla birine senet imzalatmak hangi suçu oluşturur?",
+    "answer": "Tehdit veya cebir yoluyla bir kişiye istemediği bir belgeyi imzalatmak \"Yağma\" (Gasp) suçunu oluşturur.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 148"
+  },
+  {
+    "id": 4,
+    "question": "Trafik kazasında kusurlu tarafın cezai sorumluluğu nedir?",
+    "answer": "Kazada kusurlu olan taraf, yaralanma veya ölüme sebebiyet verdiyse \"Taksirle Yaralama\" veya \"Taksirle Öldürme\" suçundan sorumlu tutulabilir.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 81, 84-89"
+  },
+  {
+    "id": 5,
+    "question": "Başkasının telefonunu izinsiz dinlemek suç mu?",
+    "answer": "Evet, bir kişinin telefon görüşmelerini izinsiz kaydetmek veya dinlemek \"Haberleşmenin Gizliliğini İhlal\" suçunu oluşturur.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 132, 133"
+  },
+  {
+    "id": 6,
+    "question": "Başkasına ait sosyal medya hesabına izinsiz girmek suç mudur?",
+    "answer": "Evet, izinsiz olarak bir sosyal medya hesabına giriş yapmak \"Bilişim Sistemine Girme\" suçunu oluşturur.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 243"
+  },
+  {
+    "id": 7,
+    "question": "Alkol alıp araba kullanmak suç mudur?",
+    "answer": "Evet, belirlenen promil sınırlarını aşan sürcüler hakkında idari para cezası ve ehliyet iptali uygulanır, kazaya sebep olunursa hapis cezası verilebilir.",
+    "law": "Türk ceza kanunu 179"
+  },
+  {
+    "id": 8,
+    "question": "Tehdit suçu nasıl oluşur?",
+    "answer": "Bir kişiye yönelik korkutma veya zarar verme tehdidinde bulunulması \"Tehdit\" suçunu oluşturur.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 106"
+  },
+  {
+    "id": 9,
+    "question": "Cinsel taciz suçu nedir?",
+    "answer": "Bir kişiye sözlü, yazılı veya fiziksel olarak cinsel içerikli rahatsız edici davranışlarda bulunmak \"Cinsel Taciz\" suçunu oluşturur.",
+    "law": "Türk Ceza Kanunu (TCK) Madde 105"
+  },
+  {
+    "id": 10,
+    "question": "Çek ve senetlerde sahtecilik yapmak suç mudur?",
+    "answer": "Evet, çek ve senet gibi belgelerde sahtecilik yapmak \"Resmi Belgede Sahtecilik\" suçunu oluşturur.",
+    "law": "Çek Kanunu Madde 7"
+  },
+  {
+    "id": 11,
+    "question": "Boşanma davası hangi sebeplerle açılabilir?",
+    "answer": "Boşanma, genel ve özel sebeplerle açılabilir. Özel sebepler arasında zina, hayata kast, pek kötü veya onur kırıcı davranış, terk ve akıl hastalığı bulunur. Genel sebepler ise evlilik birliğinin temelinden sarsılmasıdır."
+  },
+  {
+    "id": 12,
+    "question": "Çocukların velayeti kime verilir?",
+    "answer": "Boşanma veya ayrılık durumunda, çocuğun üstün yararı gözetilerek velayet anneye, babaya veya istisnai durumlarda üçüncü kişilere verilebilir."
+  },
+  {
+    "id": 13,
+    "question": "Nafaka türleri nelerdir?",
+    "answer": "Tedbir, yoksulluk, iştirak ve yardım nafakası olmak üzere dört tür nafaka vardır. Boşanma sürecinde tedbir nafakası, çocuğun bakımı için iştirak nafakası, yoksul kalan eş için yoksulluk nafakası bağlanabilir."
+  },
+  {
+    "id": 14,
+    "question": "Miras paylaşımında saklı pay nasıl hesaplanır?",
+    "answer": "Saklı pay, mirasçının kanunen korunmuş olan miras hakkıdır. Altsoyun, anne-babanın ve sağ kalan eşin belirli oranlarda saklı pay hakkı bulunmaktadır."
+  },
+  {
+    "id": 15,
+    "question": "Evlat edinme işlemi nasıl gerçekleşir?",
+    "answer": "Evlat edinme işlemi mahkeme kararıyla gerçekleşir ve çocuğun menfaati göz önünde bulundurulur. Belli şartları taşıyan kişiler evlat edinebilir."
+  },
+  {
+    "id": 16,
+    "question": "Evlilik dışı doğan çocuğun babası nasıl belirlenir?",
+    "answer": "Babalık davası açılarak çocuğun babasının belirlenmesi mümkündür. DNA testi gibi delillerle babalık ilişkisi tespit edilebilir."
+  },
+  {
+    "id": 17,
+    "question": "Aile konutu şerhi nasıl konur?",
+    "answer": "Eşlerden biri tapu müdürlüğüne başvurarak aile konutu şerhi koydurabilir. Böylece eşin rızası olmadan taşınmazın satışı engellenmiş olur."
+  },
+  {
+    "id": 18,
+    "question": "Vesayet davası hangi durumlarda açılır?",
+    "answer": "Vesayet davası, küçüklerin veya kısıtlı kişilerin korunması amacıyla açılır. Akıl hastalığı, ağır madde bağımlılığı gibi sebeplerle mahkeme tarafından vasi atanabilir."
+  },
+  {
+    "id": 19,
+    "question": "Mal rejimi nasıl belirlenir ve sona erer?",
+    "answer": "Eşler arasında edinilmiş mallara katılma rejimi asıl mal rejimidir. Taraflar başka bir mal rejimi seçebilir. Boşanma veya ölümle mal rejimi sona erer ve tasfiye edilir."
+  },
+  {
+    "id": 20,
+    "question": "Nişanın bozulması halinde hediyeler geri alınabilir mi?",
+    "answer": "Nişanlılık sona erdiğinde nişan hediyeleri geri istenebilir. Kusurlu taraf maddi ve manevi tazminat ödemek zorunda kalabilir."
+  },
+  {
+    "id": 21,
+    "question": "Haksız fiil nedeniyle tazminat davası nasıl açılır?",
+    "answer": "Bir kişinin hukuka aykırı ve kusurlu bir fiili sonucunda başka birine zarar vermesi halinde tazminat davası açılabilir. Zarar gören kişi maddi ve manevi tazminat talep edebilir."
+  },
+  {
+    "id": 22,
+    "question": "Borçlu borcunu zamanında ödemezse alacaklı hangi hukuki yollara başvurabilir?",
+    "answer": "Borçlu, borcunu ifa etmezse alacaklı icra takibi başlatabilir ve mahkemeye başvurarak borcun tahsilini isteyebilir."
+  },
+  {
+    "id": 23,
+    "question": "Kira sözleşmesi hangi durumlarda sona erdirilebilir?",
+    "answer": "Kira sözleşmesi sürenin dolması, kiracının tahliye edilmesi, fesih bildirimi veya tarafların anlaşmasıyla sona erebilir. Ayrıca, kiracı kira bedelini ödemezse tahliye davası açılabilir."
+  },
+  {
+    "id": 24,
+    "question": "Ayıplı mal veya hizmet satın alan tüketici hangi hukuki yollara başvurabilir?",
+    "answer": "Tüketici, ayıplı mal veya hizmet nedeniyle satıcıdan malın değiştirilmesini, tamir edilmesini, bedelin iadesini veya indirim yapılmasını talep edebilir."
+  },
+  {
+    "id": 25,
+    "question": "Kefil olduğu borç nedeniyle ödeme yapmak zorunda kalan kişi, asıl borçludan nasıl geri ödeme talep edebilir?",
+    "answer": "Kefil, borcu ödedikten sonra asıl borçluya rücu edebilir ve ödediği tutarı geri isteyebilir."
+  },
+  {
+    "id": 26,
+    "question": "Sözleşmenin feshi hangi şartlarda mümkündür?",
+    "answer": "Taraflardan biri sözleşmeye aykırı hareket ederse veya borcunu yerine getirmezse, sözleşme feshedilebilir. Ayrıca, taraflar karşılıklı anlaşarak da sözleşmeyi sona erdirebilir."
+  },
+  {
+    "id": 27,
+    "question": "Haksız zenginleşme nedeniyle dava nasıl açılır?",
+    "answer": "Bir kişinin haklı bir sebep olmaksızın başkasının malvarlığından zenginleşmesi durumunda, zarar gören kişi bu haksız zenginleşmenin iadesini talep edebilir."
+  },
+  {
+    "id": 28,
+    "question": "İş sözleşmesi hangi sebeplerle sona erdirilebilir?",
+    "answer": "İş sözleşmesi tarafların anlaşması, işçinin istifası, işverenin haklı feshi veya sürenin dolmasıyla sona erebilir. Ayrıca, işçi veya işveren haklı nedenle sözleşmeyi feshedebilir."
+  },
+  {
+    "id": 29,
+    "question": "Eser sözleşmesine aykırılık nedeniyle yükleniciye karşı hangi davalar açılabilir?",
+    "answer": "İş sahibinin, yüklenicinin eksik veya ayıplı iş yapması durumunda sözleşmenin feshini, ayıbın giderilmesini veya tazminat talep etmesini sağlayan davalar açılabilir."
+  },
+  {
+    "id": 30,
+    "question": "Bir kişinin başkasına verdiği vekalet hangi durumlarda sona erer?",
+    "answer": "Vekalet sözleşmesi, sürenin dolması, vekilin istifası, vekalet verenin azli veya vekaletin amacı gerçekleştiğinde sona erer."
+  },
+  {
+    "id": 31,
+    "question": "Bir şirket ortağı şirketten çıkmak istediğinde hangi hukuki yolları kullanabilir?",
+    "answer": "Şirket ortağı, şirket sözleşmesine göre belirlenen çıkış şartlarını yerine getirerek veya mahkemeye başvurarak şirketten ayrılabilir. Haklı sebeplerin varlığı halinde ortak, dava açarak ayrılmayı talep edebilir."
+  },
+  {
+    "id": 32,
+    "question": "Haksız rekabet nedeniyle nasıl dava açılabilir?",
+    "answer": "Haksız rekabet oluşturan fiilden zarar gören kişi veya şirket, rekabetin önlenmesi ve uğradığı zararların tazmini için mahkemeye başvurabilir."
+  },
+  {
+    "id": 33,
+    "question": "Şirketin iflası durumunda alacaklılar ne yapabilir?",
+    "answer": "Şirket iflas ettiğinde, alacaklılar iflas masasına kaydolmak için icra mahkemelerine başvurabilir. Alacaklarının tahsilini sağlamak için iflas davası açabilirler."
+  },
+  {
+    "id": 34,
+    "question": "Bir anonim şirketin yönetim kurulu üyeleri hangi durumlarda sorumlu tutulabilir?",
+    "answer": "Yönetim kurulu üyeleri, şirketin zararına sebep olacak kararlar aldıklarında veya görevlerini kötüye kullandıklarında, şirket ortakları veya alacaklıları tarafından sorumluluk davasına maruz kalabilirler."
+  },
+  {
+    "id": 35,
+    "question": "Ticari sırların izinsiz ifşası halinde hangi hukuki süreç işletilebilir?",
+    "answer": "Ticari sırların izinsiz olarak paylaşılması durumunda, zarar gören taraf maddi ve manevi tazminat davası açabilir. Ayrıca, rekabetin korunması kapsamında cezai yaptırımlar da uygulanabilir."
+  },
+  {
+    "id": 36,
+    "question": "Şirket birleşmelerinde ortakların hakları nasıl korunur?",
+    "answer": "Birleşme sürecinde ortaklar, birleşmeye karşı itiraz edebilir ve gerekli gördükleri takdirde mahkemeye başvurarak haklarının korunmasını talep edebilirler."
+  },
+  {
+    "id": 37,
+    "question": "Bir malın teslim edilmemesi durumunda alıcı hangi haklara sahiptir?",
+    "answer": "Satıcı, sözleşmeye uygun şekilde malı teslim etmezse, alıcı sözleşmeyi feshedebilir, bedel iadesi talep edebilir veya tazminat davası açabilir."
+  },
+  {
+    "id": 38,
+    "question": "Limited şirketlerde ortaklar hangi durumlarda şirketin feshini talep edebilir?",
+    "answer": "Şirket ortakları, şirketin faaliyetlerini sürdüremeyecek durumda olması veya yönetimde ciddi hukuka aykırılıklar bulunması halinde mahkemeye başvurarak şirketin feshini talep edebilirler."
+  },
+  {
+    "id": 39,
+    "question": "Çekte karşılıksızdır işlemi uygulanması halinde hangi hukuki yollar izlenebilir?",
+    "answer": "Karşılıksız çek veren kişi hakkında icra takibi başlatılabilir ve ayrıca ceza davası açılabilir. Alacaklı, çekin tahsili için mahkemeye başvurabilir."
+  },
+  {
+    "id": 40,
+    "question": "Bir gemi kazasında zarar gören kişi hangi hukuki yolları kullanabilir?",
+    "answer": "Deniz ticaret hukukuna göre, gemi kazalarında zarar gören kişi, gemi sahibine veya işletmecisine karşı tazminat davası açabilir. Ayrıca, sigorta şirketlerinden zararlarının karşılanmasını talep edebilir."
+  },
+  {
+    "id": 41,
+    "question": "Ayıplı mal satın alan tüketici hangi haklara sahiptir?",
+    "answer": "Tüketici, ayıplı malın değiştirilmesini, bedel iadesini, ücretsiz onarımını veya ayıplı malın ayıpsız bir misliyle değiştirilmesini talep edebilir."
+  },
+  {
+    "id": 43,
+    "question": "Tüketici, satıcının kendisine haksız şartlar içeren bir sözleşme imzalattığını fark ederse ne yapabilir?",
+    "answer": "Tüketici, mahkemeye başvurarak haksız şartların geçersiz sayılmasını talep edebilir."
+  },
+  {
+    "id": 44,
+    "question": "Bir tüketici, mesafeli satış (internet alışverişi) sonrası cayma hakkını nasıl kullanabilir?",
+    "answer": "Tüketici, 14 gün içinde herhangi bir gerekçe göstermeden ve cezai şart ödemeden cayma hakkını kullanabilir."
+  },
+  {
+    "id": 45,
+    "question": "Bir hizmetin ayıplı olduğu tespit edilirse tüketici hangi haklara sahiptir?",
+    "answer": "Tüketici, hizmetin yeniden görülmesini, bedel indirimi yapılmasını veya sözleşmenin feshedilmesini talep edebilir."
+  },
+  {
+    "id": 46,
+    "question": "Ticari reklamlarda aldatıcı beyanlar bulunması durumunda tüketici ne yapabilir?",
+    "answer": "Tüketici, Reklam Kurulu’na şikayette bulunarak reklamın durdurulmasını veya idari yaptırım uygulanmasını talep edebilir."
+  },
+  {
+    "id": 47,
+    "question": "Bankalar tarafından haksız yere alınan dosya masrafları için tüketici hangi hukuki yolu izleyebilir?",
+    "answer": "Tüketici, Tüketici Hakem Heyeti’ne veya Tüketici Mahkemesi’ne başvurarak haksız ücretlerin iadesini talep edebilir."
+  },
+  {
+    "id": 48,
+    "question": "Kapıdan satış yoluyla alınan bir ürün için tüketici cayma hakkını kullanabilir mi?",
+    "answer": "Evet. Tüketici, kapıdan satışlarda 14 gün içinde cayma hakkını kullanabilir."
+  },
+  {
+    "id": 49,
+    "question": "Tüketici, satış sonrası verilen garantinin yerine getirilmediğini fark ederse ne yapabilir?",
+    "answer": "Tüketici, satıcı veya üreticiye karşı dava açarak garanti kapsamında tamirat veya değişim talep edebilir."
+  },
+  {
+    "id": 50,
+    "question": "Tüketici, devre tatil sözleşmesini iptal etmek istediğinde hangi haklara sahiptir?",
+    "answer": "Tüketici, 14 gün içinde hiçbir gerekçe göstermeden ve cezai şart ödemeden sözleşmeyi iptal edebilir."
+  },
+  {
+    "id": 51,
+    "question": "İşçi, fazla mesai ücreti ödenmediğinde ne yapabilir?",
+    "answer": "İşçi, fazla mesai ücretini talep edebilir ve ödenmemesi halinde iş mahkemesine başvurarak dava açabilir."
+  }
+]

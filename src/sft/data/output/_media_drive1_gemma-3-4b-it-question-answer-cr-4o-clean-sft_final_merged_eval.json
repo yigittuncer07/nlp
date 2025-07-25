@@ -1,0 +1,42 @@
+[
+    {
+        "input": "Hırsızlık suçunun cezası nedir?",
+        "model_response": "Hırsızlık suçunun işlenmesi halinde, şikayet üzerine fail hakkında iki aydan bir yıla kadar hapis veya adlî para cezasına hükmolunur."
+    },
+    {
+        "input": "Dolandırıcılık suçu nasıl oluşur?",
+        "model_response": "Dolandırıcılık suçu, hileli bir davranışla aldatılan ve bu davranışın sonucunda istenilen maddi yararın elde edilmesinin sağlanmasıyla oluşur."
+    },
+    {
+        "input": "Zorla birine senet imzalatmak hangi suçu oluşturur?",
+        "model_response": "Zorla birine senet imzalatmak, TCK m.156'da düzenlenen ikna suretiyle irtikâp suçunu oluşturmaz. Bu suç bakımından, zorla birine senet verip veya vermeyecek imzalatarak kendisine veya başkasına yarar sağlamak icra ve ikna suretiyle irtikâp suçunu oluşturabilir."
+    },
+    {
+        "input": "Trafik kazasında kusurlu tarafın cezai sorumluluğu nedir?",
+        "model_response": "Trafik kazasında kusurlu tarafın cezai sorumluluğu, 2918 sayılı Karayolları Trafik Kanunu'nun 179. maddesi uyarınca muaccel olduğu ve peşin ödeme şeklinde ödenmesi gereken para cezasıdır. Bu kaza dolayısıyla yaralanmış veya ödemiş olduğu vekilleri veya yardımcıları trafik suçları ve görev ve yetki uyarınca kimlik ve adresi tespit edilecek olanlar trafik cezası ve vergi cezası dışındaki ceza ve para cezalarının kesinleşmiş sayılabileceği ve gecikmesinde sakınca bulunan hallerde kesinleşmiş sayılabilecektir. Mali mesulü olan gerçek ve tüzel kişiler ile mali sorumluluk sigortası yürütülen mükelleflerin trafik siciline kayıtlı olan araçları müteakip takip edilmek suretiyle tebligat yapılması ve tebliğ olunacak ceza ve para cezalarının kesinleşmiş sayılabileceği ve gecikmesinde sakınca bulunmayan hallerde ödenmesi gereken ihtiyar saları ve vergi cezaları belirtilmiş olan kimselere iade edilmesi gereken trafik cezaları ödenerek iade edilmesi gerekmektedir."
+    },
+    {
+        "input": "Başkasının telefonunu izinsiz dinlemek suç mu?",
+        "model_response": "Evet, başkasının aleni olmayan konuşmalarını izinsiz dinlemek veya kaydetmek suça vücut verir. Ayrıca, iki kişi arasındaki konuşmayı taraflardan biri diğer tarafın rızası olmaksızın ses alma cihazı ile kaydetmişse, bu fiiller suç olarak kabul edilir ve cezalandırılır."
+    },
+    {
+        "input": "Başkasına ait sosyal medya hesabına izinsiz girmek suç mudur?",
+        "model_response": "Evet, TCK m.226/1'de düzenlenen bir bilişim suçunun işlenmesi olarak tanımlanan fiiller, başka bir sosyal medya hesabına izinsiz girmek suçu olarak kabul edilir."
+    },
+    {
+        "input": "Alkol alıp araba kullanmak suç mudur?",
+        "model_response": "Evet, alkol alıp araba kullanmak Türk Ceza Kanununun 179. maddesine göre suçtur."
+    },
+    {
+        "input": "Tehdit suçu nasıl oluşur?",
+        "model_response": "Tehdit suçu, kişinin bir zarara uğratılacağı hususunda korkutularak iradesine etki edilerek gelecekte belli bir şekilde hareket etmesinin sağlanmasıyla oluşur."
+    },
+    {
+        "input": "Cinsel taciz suçu nedir?",
+        "model_response": "Cinsel taciz suçu, bir kimsenin cinsel amaçlı olarak taciz yapması sonucu oluşan bir suçtur. Bu suç, Türk Ceza Kanunu'nun Cinsel Dokunulmazlığa Karşı Suçlar bölümünde düzenlenmiştir ve cinsel özgürlüğe karşı bir suç oluşturur."
+    },
+    {
+        "input": "Çek ve senetlerde sahtecilik yapmak suç mudur?",
+        "model_response": "Evet, çek ve senetlerdeki yazı veya imzayı inkâr etmek sahtecilik suçuna vücut verir. Sahtecilik suçunun vücut bulması için, senet veya çeklerdeki yazı veya imzayı inkâr eden kişinin, bunu bilmesi ve istemesi, senedin veya çekin sahte olduğu hususunda muhatap veya alacaklıya bir menfaat temin etmiş olması, sahteciliğin bir hukuki ilişkiye dayanan alacağı tahsil amacıyla yapılmış olması, senedi veya çeki aldatma (hataya sevk etme) kasdı ile alacaklıya karşı kasten yapılmış olması ve alacaklının veya bir başkasının zararına zilyet olmanın temini yönünden aslına aykırı beyanda bulunması ve senedi veya çekin sahte olduğunun mahkemece veya borçlunun inkârı durumunda bile, senedin veya çekin aldatma (hataya sevk etme) özelliği ile zilyedin iradesine hâkimiyet kurması yeterlidir."
+    }
+]
